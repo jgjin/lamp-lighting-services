@@ -26,8 +26,8 @@ def create_lamp():
     return flask.jsonify({})
 
 
-@app.route("/lamps/<lamp_id>")
+@app.route("/lamps/<int:lamp_id>")
 def get_lamp(lamp_id):
-    lamp = {"id": 3, "name": "Desk lamp"}
+    lamp = db.get_or_404(Lamp, lamp_id)
 
-    return flask.jsonify(lamp)
+    return flask.jsonify(lamp.to_dict())
