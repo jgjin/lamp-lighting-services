@@ -1,7 +1,7 @@
 {
     "openapi": "3.1.0",
     "info": {
-        "title": "Lamp Lighting Services API",
+        "title": "Lamp Lighting Services Lamps API",
         "version": "0.1",
         "license": {
             "name": "MIT",
@@ -58,7 +58,7 @@
         },
         "/lamps/{lampId}": {
             "get": {
-                "summary": "Info for an identified lamp",
+                "summary": "Gets info for an identified lamp",
                 "operationId": "getLamp",
                 "parameters": [
                     {
