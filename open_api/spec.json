@@ -1,5 +1,5 @@
 {
-    "openapi": "3.0",
+    "openapi": "3.1.0",
     "info": {
         "title": "Lamp Lighting Services API",
         "version": "0.1",
@@ -16,14 +16,22 @@
                 "responses": {
                     "200": {
                         "description": "List of all lamps",
-                        "schema": {
-                            "$ref": "#/definitions/Lamps"
+                        "content": {
+                            "application/json": {
+                                "schema": {
+                                    "$ref": "#/components/schemas/Lamps"
+                                }
+                            }
                         }
                     },
                     "default": {
                         "description": "Unexpected error",
-                        "schema": {
-                            "$ref": "#/definitions/Error"
+                        "content": {
+                            "application/json": {
+                                "schema": {
+                                    "$ref": "#/components/schemas/Error"
+                                }
+                            }
                         }
                     }
                 }
@@ -37,8 +45,12 @@
                     },
                     "default": {
                         "description": "Unexpected error",
-                        "schema": {
-                            "$ref": "#/definitions/Error"
+                        "content": {
+                            "application/json": {
+                                "schema": {
+                                    "$ref": "#/components/schemas/Error"
+                                }
+                            }
                         }
                     }
                 }
@@ -51,59 +63,71 @@
                 "parameters": [
                     {
                         "name": "lampId",
-                        "description": "The ID of a lamp",
                         "in": "path",
+                        "description": "The ID of a lamp",
                         "required": true,
-                        "type": "integer",
-                        "format": "int64"
+                        "schema": {
+                            "type": "integer",
+                            "format": "int64"
+                        }
                     }
                 ],
                 "responses": {
                     "200": {
                         "description": "Info about the identified lamp",
-                        "schema": {
-                            "$ref": "#/definitions/Lamp"
+                        "content": {
+                            "application/json": {
+                                "schema": {
+                                    "$ref": "#/components/schemas/Lamp"
+                                }
+                            }
                         }
                     },
                     "default": {
                         "description": "Unexpected error",
-                        "schema": {
-                            "$ref": "#/definitions/Error"
+                        "content": {
+                            "application/json": {
+                                "schema": {
+                                    "$ref": "#/components/schemas/Error"
+                                }
+                            }
                         }
                     }
                 }
             }
         }
     },
-    "definitions": {
-        "Lamp": {
-            "properties": {
-                "id": {
-                    "type": "integer",
-                    "format": "int64"
-                },
-                "name": {
-                    "type": "string"
-                },
-                "imageUrl": {
-                    "type": "string"
+    "components": {
+        "schemas": {
+            "Lamp": {
+                "properties": {
+                    "id": {
+                        "type": "integer",
+                        "format": "int64"
+                    },
+                    "name": {
+                        "type": "string"
+                    },
+                    "imageUrl": {
+                        "type": "string"
+                    }
                 }
-            }
-        },
-        "Lamps": {
-            "type": "array",
-            "items": {
-                "$ref": "#/definitions/Lamp"
-            }
-        },
-        "Error": {
-            "properties": {
-                "code": {
-                    "type": "integer",
-                    "format": "int32"
-                },
-                "message": {
-                    "type": "string"
+            },
+            "Lamps": {
+                "type": "array",
+                "items": {
+                    "$ref": "#/components/schemas/Lamp"
+                }
+            },
+            "Error": {
+                "properties": {
+                    "code": {
+                        "type": "integer",
+                        "format": "int32"
+                    },
+                    "message": {
+                        "type": "string"
+                    }
                 }
             }
         }
