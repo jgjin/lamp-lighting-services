@@ -1,0 +1,111 @@
+{
+    "openapi": "3.0",
+    "info": {
+        "title": "Lamp Lighting Services API",
+        "version": "0.1",
+        "license": {
+            "name": "MIT",
+            "identifier": "MIT"
+        }
+    },
+    "paths": {
+        "/lamps": {
+            "get": {
+                "summary": "Lists all lamps",
+                "operationId": "listAllLamps",
+                "responses": {
+                    "200": {
+                        "description": "List of all lamps",
+                        "schema": {
+                            "$ref": "#/definitions/Lamps"
+                        }
+                    },
+                    "default": {
+                        "description": "Unexpected error",
+                        "schema": {
+                            "$ref": "#/definitions/Error"
+                        }
+                    }
+                }
+            },
+            "post": {
+                "summary": "Creates a lamp",
+                "operationId": "createLamp",
+                "responses": {
+                    "201": {
+                        "description": "Empty response"
+                    },
+                    "default": {
+                        "description": "Unexpected error",
+                        "schema": {
+                            "$ref": "#/definitions/Error"
+                        }
+                    }
+                }
+            }
+        },
+        "/lamps/{lampId}": {
+            "get": {
+                "summary": "Info for an identified lamp",
+                "operationId": "getLamp",
+                "parameters": [
+                    {
+                        "name": "lampId",
+                        "description": "The ID of a lamp",
+                        "in": "path",
+                        "required": true,
+                        "type": "integer",
+                        "format": "int64"
+                    }
+                ],
+                "responses": {
+                    "200": {
+                        "description": "Info about the identified lamp",
+                        "schema": {
+                            "$ref": "#/definitions/Lamp"
+                        }
+                    },
+                    "default": {
+                        "description": "Unexpected error",
+                        "schema": {
+                            "$ref": "#/definitions/Error"
+                        }
+                    }
+                }
+            }
+        }
+    },
+    "definitions": {
+        "Lamp": {
+            "properties": {
+                "id": {
+                    "type": "integer",
+                    "format": "int64"
+                },
+                "name": {
+                    "type": "string"
+                },
+                "imageUrl": {
+                    "type": "string"
+                }
+            }
+        },
+        "Lamps": {
+            "type": "array",
+            "items": {
+                "$ref": "#/definitions/Lamp"
+            }
+        },
+        "Error": {
+            "properties": {
+                "code": {
+                    "type": "integer",
+                    "format": "int32"
+                },
+                "message": {
+                    "type": "string"
+                }
+            }
+        }
+    }
+}
