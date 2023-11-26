@@ -1,6 +1,7 @@
 import flask
 
-from lamps import app
+from lamps import app, db
+from lamps.models import Lamp
 
 
 @app.route("/lamps", methods=["GET"])
@@ -18,7 +19,16 @@ def list_all_lamps():
 
 @app.route("/lamps", methods=["POST"])
 def create_lamp():
-    raise NotImplementedError
+    body = flask.request.get_json()
+    lamp = Lamp(
+        name=body["name"],
+        image_url=body["image_url"],
+    )
+
+    db.session.add(lamp)
+    db.session.commit()
+
+    return flask.jsonify({})
 
 
 @app.route("/lamps/<lamp_id>")
