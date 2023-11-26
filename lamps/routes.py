@@ -6,15 +6,10 @@ from lamps.models import Lamp
 
 @app.route("/lamps", methods=["GET"])
 def list_all_lamps():
-    all_lamps = [{
-        "id": 3,
-        "name": "Desk lamp"
-    }, {
-        "id": 6,
-        "name": "Floor lamp"
-    }]
+    lamps = db.session.query(Lamp).all()
+    lamps = list(map(lambda lamp: lamp.to_dict(), lamps))
 
-    return flask.jsonify(all_lamps)
+    return flask.jsonify(lamps)
 
 
 @app.route("/lamps", methods=["POST"])
