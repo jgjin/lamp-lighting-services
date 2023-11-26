@@ -1,3 +1,3 @@
 #!zsh
 
-poetry run flask --app=lamps run
+poetry run flask --app=lamps --debug run
