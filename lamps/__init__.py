@@ -3,7 +3,7 @@ from flask_sqlalchemy import SQLAlchemy
 from sqlalchemy.orm import DeclarativeBase
 
 app = Flask(__name__)
-app.config["SQLALCHEMY_DATABASE_URI"] = "sqlite:///lamps.sqlite"
+app.config["SQLALCHEMY_DATABASE_URI"] = "postgresql://127.0.0.1:5432/lamps"
 
 
 class Base(DeclarativeBase):
