@@ -15,18 +15,29 @@
         "react"
     ],
     "rules": {
+        "@typescript-eslint/comma-dangle": [
+            "error",
+            {
+                "arrays": "always-multiline",
+                "objects": "always-multiline",
+                "imports": "always-multiline",
+                "exports": "always-multiline",
+                "functions": "only-multiline"
+            }
+        ],
         "@typescript-eslint/explicit-function-return-type": [
             "error",
             {
                 "allowFunctionsWithoutTypeParameters": true
             }
         ],
+        "indent": "off",
+        "@typescript-eslint/indent": ["error", 4],
         "quotes": "off",
         "@typescript-eslint/quotes": [
             "error",
             "double"
         ],
-        "space-before-function-paren": "off",
         "@typescript-eslint/space-before-function-paren": [
             "error",
             "never"
