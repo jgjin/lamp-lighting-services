@@ -1,14 +1,22 @@
-import React, { useState } from "react"
+import React, { useEffect, useState } from "react"
 
 import { type Lamp } from "../open-api"
 import { useParams } from "react-router-dom"
+import lampApi from "./lampApi"
 
 function LampInfo() {
     const { lampId } = useParams()
-    const [lamp] = useState<Lamp>({
-        id: parseInt(lampId ?? "-420"),
-        name: "ceiling",
-    })
+    const [lamp, setLamp] = useState<Lamp>({})
+
+    useEffect(() => {
+        async function getLamp() {
+            if (lampId !== undefined) {
+                setLamp(await lampApi.getLamp(parseInt(lampId)))
+            }
+        }
+
+        void getLamp()
+    }, [lampId, setLamp])
 
     return (
         <div>
