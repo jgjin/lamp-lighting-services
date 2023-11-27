@@ -1,3 +1,5 @@
+from http import HTTPStatus
+
 import flask
 
 from lamps import app, db
@@ -17,13 +19,13 @@ def create_lamp():
     body = flask.request.get_json()
     lamp = Lamp(
         name=body["name"],
-        image_url=body["image_url"],
+        image_url=body["imageUrl"],
     )
 
     db.session.add(lamp)
     db.session.commit()
 
-    return flask.jsonify({})
+    return flask.jsonify({}), HTTPStatus.CREATED
 
 
 @app.route("/lamps/<int:lamp_id>")

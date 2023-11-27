@@ -1,7 +1,7 @@
 import React, { useEffect, useState } from "react"
+import { useParams } from "react-router-dom"
 
 import { type Lamp } from "../open-api"
-import { useParams } from "react-router-dom"
 import lampApi from "./lampApi"
 
 function LampInfo() {
