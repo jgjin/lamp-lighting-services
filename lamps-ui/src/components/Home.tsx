@@ -2,6 +2,7 @@ import React, { useEffect, useState } from "react"
 
 import { type Lamp } from "../open-api"
 import lampApi from "./lampApi"
+import LampCard from "./LampCard"
 
 function Home() {
     const [lamps, setLamps] = useState<Lamp[]>([])
@@ -17,13 +18,14 @@ function Home() {
     }, [setLamps])
 
     const lampCards = lamps.map((lamp) => (
-        <div key={lamp.id}>
-            <h1>{lamp.id}</h1>
-            <p>{lamp.name}</p>
-        </div>
+        <LampCard key={lamp.id} {...lamp} />
     ))
 
-    return <div>{lampCards}</div>
+    return (
+        <div className="flex justify-center my-12">
+            <div className="flex flex-col space-y-4 w-fit">{lampCards}</div>
+        </div>
+    )
 }
 
 export default Home
