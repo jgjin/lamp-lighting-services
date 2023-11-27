@@ -1,18 +1,20 @@
-import React from "react"
+import React, { useEffect, useState } from "react"
 
 import { type Lamp } from "../open-api"
+import lampApi from "./lampApi"
 
 function Home() {
-    const lamps: Lamp[] = [
-        {
-            id: 1,
-            name: "desk",
-        },
-        {
-            id: 2,
-            name: "floor",
-        },
-    ]
+    const [lamps, setLamps] = useState<Lamp[]>([])
+
+    useEffect(() => {
+        async function getAllLamps() {
+            const allLamps = await lampApi.listAllLamps()
+
+            setLamps(allLamps)
+        }
+
+        void getAllLamps()
+    }, [setLamps])
 
     const lampCards = lamps.map((lamp) => (
         <div key={lamp.id}>
